@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use DB;
 
 class CreateProductsTable extends Migration
 {
@@ -17,12 +16,15 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('slug')->unique();
-            $table->Integer('category_id')->unsigned();
-            $table->Integer('price', 5);
+            $table->integer('category_id')->unsigned();
+            $table->integer('price');
             $table->text('description');
+            $table->boolean('status')->default(true);
+            $table->string('image');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete(DB::raw('set null'));
+             $table->foreign('category_id')->references('id')->on('categories');
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
         });
     }
 

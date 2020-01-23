@@ -2,17 +2,14 @@
 
 use Illuminate\Http\Request;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::post('/login','Admin\AuthController@login');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/category','Admin\CategoryController@index');
+Route::post('/category','Admin\CategoryController@store');
+Route::put('/category/{category}','Admin\CategoryController@update');
+Route::delete('/category/{category}','Admin\CategoryController@destroy');
+
+Route::get('/branch','Admin\BranchController@index');
+Route::post('/branch','Admin\BranchController@store');
+Route::put('/branch/{branch}','Admin\BranchController@update');
+Route::delete('/branch/{branch}','Admin\BranchController@destroy');
