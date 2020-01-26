@@ -17,9 +17,10 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
             $table->integer('branch_id')->unsigned();
-            $table->string('name', 30);
+            $table->string('name');
             $table->integer('amount');
-            $table->boolean('status')->default(false);
+            $table->integer('price');
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');

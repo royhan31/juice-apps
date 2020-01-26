@@ -13,3 +13,15 @@ Route::get('/branch','Admin\BranchController@index');
 Route::post('/branch','Admin\BranchController@store');
 Route::put('/branch/{branch}','Admin\BranchController@update');
 Route::delete('/branch/{branch}','Admin\BranchController@destroy');
+
+Route::get('/product','Admin\ProductController@index');
+Route::post('/product','Admin\ProductController@store');
+
+
+
+Route::post('test', 'Consumer\OrderController@store');
+
+// Route::post('test', function () {
+//     event(new App\Events\Order('Someone',3,1));
+//     return "Event has been sent!";
+// });

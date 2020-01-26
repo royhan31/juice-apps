@@ -9,10 +9,10 @@ use App\Order;
 
 class BranchController extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('auth:api')->except('index');
-  }
+  // public function __construct()
+  // {
+  //     $this->middleware('auth:api')->except('index');
+  // }
 
   public function index(){
     $branches = Branch::orderBy('name', 'ASC')->get();
@@ -48,7 +48,7 @@ class BranchController extends Controller
       ]);
     }
 
-    Category::create(['name' => $name,'slug' => $slug,'description' => $description]);
+    Branch::create(['name' => $name,'slug' => $slug,'description' => $description]);
 
     return response()->json(['message' => 'success','status' => true,]);
   }
