@@ -15,15 +15,11 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('product_id')->unsigned();
             $table->integer('branch_id')->unsigned();
             $table->string('name');
-            $table->integer('amount');
-            $table->integer('price');
             $table->boolean('status')->default(true);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
 
-            $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('branch_id')->references('id')->on('branches');
         });
     }

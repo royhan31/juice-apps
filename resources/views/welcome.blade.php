@@ -53,10 +53,24 @@
        </div>
      </div>
    </nav>
-
-
    <select id="branch">
    </select>
+   <div class="mt-5">
+     <div class="container">
+       <div class="row">
+         <div class="col">
+           <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+         </div>
+       </div>
+    </div>
+   </div>
 
    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
    <script src="//js.pusher.com/3.1/pusher.min.js"></script>

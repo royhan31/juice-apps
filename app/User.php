@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password','username','id'
+        'password'
     ];
 
     public $timestamps = false;

@@ -10,9 +10,11 @@ class Category extends Model
 
     protected $guarded = [];
 
-    protected $hidden = ['slug'];
-
     public function products(){
       return $this->hasMany(Product::class, 'category_id','id');
+    }
+
+    public function topings(){
+      return $this->hasMany(Toping::class, 'Toping_id','id');
     }
 }

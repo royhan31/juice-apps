@@ -10,15 +10,15 @@ class OrderController extends Controller
 {
     public function store(Request $request){
       $name = $request->name;
-      $amount = $request->amount;
       $branch = $request->branch_id;
       $product = $request->$products;
 
 
-      $order = new Order();
-      $order->sendNotifyOrders($name,$amount,$branch);
+      // $order = new Order();
+      // $order->sendNotifyOrders($name,$amount,$branch);
       return response()->json([
-        'message' => 'success'
+        'message' => 'success',
+        'data' => $request->all()
       ]);
       // event(new App\Events\Order($name,$amount,$branch));
     }

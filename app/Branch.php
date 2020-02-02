@@ -10,8 +10,6 @@ class Branch extends Model
 
     protected $guarded = [];
 
-    protected $hidden = ['slug'];
-
     public function orders(){
       return $this->hasMany(Order::class, 'branch_id','id');
     }

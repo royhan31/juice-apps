@@ -17,49 +17,34 @@ class ProductController extends Controller
 
   public function index(){
     $results = [];
-    $products = Product::all();
-
-    foreach ($products as $p) {
-      $results[] = [
-          'id' => $p->id,
-          'name' => $p->name,
-          'category' => $p->category->name,
-          'price' => $p->price,
-          'image' => $p->image,
-          'description' => $p->description,
-      ];
-    }
-
-    return response()->json([
-      'message' => 'success',
-      'status' => true,
-      'data' => $results
-    ]);
+    $products = Product::where('status', true)->get();
+    foreach ($products as $p) {$results[] = $p->products($p);}
+    return response()->json(['message' => 'success','status' => true,'data' => $results]);
   }
 
   public function store(Request $request){
     $rule = [
       'name' => 'required|min:3|max:100',
-      'price' => 'required',
+      'price' => 'required|numeric|between:100,1000000',
       'description' => 'required',
-      'image' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+      'image' => 'required|mimes:jpeg,jpg,png|max:2048',
       'category_id' => 'required'
     ];
     $message = [
       'required' => 'Isi bidang ini.',
-      'min' => 'Nama minimal 3 huruf.',
-      'max' => 'Nama maksimal 100 huruf.',
-      'mimes' => 'Masukan gambar JPEG,JPG,PNG',
+      'name.min' => 'Nama minimal 3 huruf.',
+      'name.max' => 'Nama maksimal 100 huruf.',
+      'image.mimes' => 'Masukan gambar JPEG,JPG,PNG',
+      'image.uploaded' => 'Gambar maksimal 2MB',
+      'between' => 'Harga minimal Rp. 100'
     ];
     $this->validate($request, $rule, $message);
 
-    $name = $request->name;
-    $slug = str_slug($name);
-    $error = ['name' => [$name.' sudah ada.' ]];
+    $name = ucwords(strtolower($request->name));
+    $productName = Product::where('name', $name)->first();
 
-    $productSlug = Product::where('slug', $slug)->first();
-
-    if($productSlug){
+    if($productName){
+      $error = ['name' => [$name.' sudah ada.' ]];
       return response()->json([
         'message' => 'failed',
         'status' => false,
@@ -67,10 +52,9 @@ class ProductController extends Controller
       ]);
     }
 
-    $image = $request->file('image')->store('images');
+    $image = $request->file('image')->store('');
     Product::create([
       'name' => $name,
-      'slug' => $slug,
       'category_id' => $request->category_id,
       'price' => $request->price,
       'description' => $request->description,
@@ -101,4 +85,27 @@ class ProductController extends Controller
       'data' => $product
     ]);
   }
+
+  public function showByCategory($id){
+    $results = [];
+    $products = Product::where('status', true)->where('category_id', $id)->get();
+
+    foreach ($products as $p) {
+      $results[] = [
+          'id' => $p->id,
+          'name' => $p->name,
+          'category' => $p->category->name,
+          'price' => $p->price,
+          'image' => $p->image,
+          'description' => $p->description,
+      ];
+    }
+
+    return response()->json([
+      'message' => 'success',
+      'status' => true,
+      'data' => $results
+    ]);
+  }
+
 }

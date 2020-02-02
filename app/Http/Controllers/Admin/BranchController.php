@@ -32,23 +32,20 @@ class BranchController extends Controller
     ];
     $this->validate($request, $rule, $message);
 
-    $name = $request->name;
-    $slug = str_slug($name);
+    $name = ucwords(strtolower($request->name));
     $description = $request->description;
 
-    $error = ['name' => [ 'Cabang '.$name.' sudah ada.' ]];
+    $branchName = Branch::where('name', $name)->first();
 
-    $branchSlug = Branch::where('slug', $slug)->first();
-
-    if($branchSlug){
+    if($branchName){
       return response()->json([
         'message' => 'failed',
         'status' => false,
-        'errors' => $error
+        'errors' => 'Nama Cabang '.$name.' sudah ada.'
       ]);
     }
 
-    Branch::create(['name' => $name,'slug' => $slug,'description' => $description]);
+    Branch::create(['name' => $name,'description' => $description]);
 
     return response()->json(['message' => 'success','status' => true,]);
   }
@@ -60,42 +57,36 @@ class BranchController extends Controller
       'min' => 'Nama kategori minimal 3 huruf.',
       'max' => 'Nama kategori maksimal 30 huruf.'
     ];
-
     $this->validate($request, $rule, $message);
 
-    $name = $request->name;
-    $slug = str_slug($name);
+    $name = ucwords(strtolower($request->name));
     $description = $request->description;
 
-    $error = ['name' => [ 'Cabang '.$name.' sudah ada.']];
-
-    $branchSlug = Branch::where('slug', $slug)->first();
-
-    if($slug == $branch->slug){
-      return response()->json(['message' => 'success','status' => true]);
+    $branchName = Branch::where('name', $name)->first();
+    if($name == $branch->name){
+     return response()->json(['message' => 'success','status' => true]);
     }
-    elseif($branchSlug){
+    elseif($branchName){
       return response()->json([
         'message' => 'failed',
         'status' => false,
-        'errors' => $error
+        'errors' => 'Nama Cabang '.$name.' sudah ada.'
       ]);
     }
 
-    $branch->update(['name' => $name,'slug' => $slug,'description' => $description]);
+    $branch->update(['name' => $name,'description' => $description]);
 
     return response()->json(['message' => 'success','status' => true]);
   }
 
   public function destroy(Branch $branch){
     $order = Order::where('branch_id', $branch)->first();
-    $error = ['branch' => [ 'Cabang '.$branch->name.' sedang digunakan.']];
 
     if($order){
       return response()->json([
         'message' => 'failed',
         'status' => false,
-        'errors' => $error
+        'errors' => 'Cabang '.$branch->name.' sedang digunakan.'
       ]);
     }
 

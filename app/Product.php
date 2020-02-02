@@ -20,4 +20,15 @@ class Product extends Model
       return $this->updated_at->diffForHumans();
     }
 
+    public function products($p){
+      return [
+          'id' => $p->id,
+          'name' => $p->name,
+          'category' => $p->category->name,
+          'price' => $p->price,
+          'image' => $p->image,
+          'description' => $p->description,
+      ];
+    }
+
 }

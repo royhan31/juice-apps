@@ -43,6 +43,6 @@ class Order implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['product-order'.$this->branch];
+        return ['product-order-'.$this->branch];
     }
 }

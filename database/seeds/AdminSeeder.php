@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Category;
+use App\Branch;
+
 class AdminSeeder extends Seeder
 {
     /**
@@ -17,5 +20,13 @@ class AdminSeeder extends Seeder
           'password' => bcrypt(12345678),
           'api_token' => bcrypt('admin')
         ]);
+
+        Category::create(['name' => 'Minuman']);
+
+        Category::create(['name' => 'Makanan']);
+
+        Branch::create(['name' => 'Cabang 1']);
+
+        Branch::create(['name' => 'Cabang 2']);
     }
 }
