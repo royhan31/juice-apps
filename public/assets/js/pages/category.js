@@ -1,6 +1,6 @@
 const inputSearch = document.getElementById("search");
 // const url = "http://localhost:8000/";
-const url = "http://juice-apps.herokuapp.com/"
+const url = "https://juice-apps.herokuapp.com/"
 const addCategory = document.querySelector('.btn-add');
 const inputCategory = document.querySelector('.input-add');
 const apiToken = document.querySelector('.api-token').dataset.token;
