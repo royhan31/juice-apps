@@ -91,6 +91,9 @@ addCategory.addEventListener('click', function(){
   else {
     const data = {name: inputCategory.value}
     storeCategory(data);
+    inputCategory.classList.remove('is-invalid')
+    inputCategory.value = ''
+    inputErr.innerHTML = ''
   }
 })
 
