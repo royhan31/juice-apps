@@ -9,7 +9,9 @@
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico')}}">
     <!-- Jquery Toast css -->
     <link href="{{ asset('assets/libs/jquery-toast/jquery.toast.min.css')}}" rel="stylesheet" type="text/css" />
-
+    <!-- third party css -->
+    <link href="{{ asset('assets/libs/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- App css -->
     <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />

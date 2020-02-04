@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 Route::post('/login','Admin\AuthController@login');
 
 Route::get('/category','Admin\CategoryController@index');
+Route::get('/category/{category}','Admin\CategoryController@show');
+Route::get('/category/search/{keyword}','Admin\CategoryController@search');
 Route::post('/category','Admin\CategoryController@store');
 Route::put('/category/{category}','Admin\CategoryController@update');
 Route::delete('/category/{category}','Admin\CategoryController@destroy');
