@@ -32,7 +32,8 @@ class CategoryController extends Controller
   }
 
   public function search($keyword){
-    $categories = Category::where('name','LIKE','%'.$keyword.'%')->get();
+    $categories = Category::where('name','ILIKE','%'.$keyword.'%')->get(); //postgre
+    // $categories = Category::where('name','ILIKE','%'.$keyword.'%')->get(); //mysql
     return response()->json([
       'message' => 'success',
       'status' => true,
