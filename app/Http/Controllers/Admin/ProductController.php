@@ -19,15 +19,23 @@ class ProductController extends Controller
     return [
       'current_page' => $products->currentPage(),
       'last_page' => $products->lastPage(),
-      'first_page' => $products->onFirstPage(),
-      'next_page' => $products->nextPageUrl() ? true : false,
-      'prev_page' => $products->previousPageUrl() ? true : false,
     ];
   }
 
   public function index(){
     $results = [];
-    $products = Product::where('status', true)->Paginate(4);
+    $products = Product::where('status', true)->get;
+    foreach ($products as $p) {$results[] = $p->products($p);}
+    return response()->json([
+      'message' => 'success',
+      'status' => true,
+      'data' => $results
+    ]);
+  }
+
+  public function webIndex(){
+    $results = [];
+    $products = Product::where('status', true)->Paginate(2);
     $paginate = $this->productPaginate($products);
     foreach ($products as $p) {$results[] = $p->products($p);}
     return response()->json([

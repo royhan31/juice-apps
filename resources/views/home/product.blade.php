@@ -46,12 +46,12 @@
     <div class="col-12">
         <ul class="pagination pagination-rounded justify-content-center mb-3">
             <li class="page-item">
-                <button class="prev-page page-link" data-num="1" aria-label="Previous"><span class="prev-page" aria-hidden="true">«</span></button>
+                <button class="prev-page page-link"><span>«</span></button>
             </li>
             <ul class="number-paginate pagination">
             </ul>
             <li class="page-item">
-                <button class="next-page page-link" data-num="1"><span class="next-page" aria-hidden="true">»</span></button>
+                <button class="next-page page-link"><span>»</span></button>
             </li>
         </ul>
     </div> <!-- end col-->
@@ -63,13 +63,13 @@ const numberPaginate = document.querySelector('.number-paginate');
 const selectCategory = document.querySelector('.category-select');
 const nextPage = document.querySelector('.next-page');
 const prevPage = document.querySelector('.prev-page');
+let num = 1;
 
 
 function getProduct(){
-    return fetch(url+'api/product').then(res => res.json())
+    return fetch(url+'api/web/product').then(res => res.json())
     .then(res => {
       updateUI(res);
-      paginate(res.paginate);
     });
 }
 
@@ -86,7 +86,7 @@ function getCategory(){
 
 
 function paginateNumber(page){
-  return fetch(url+'api/product?page='+page).then(res => res.json())
+  return fetch(url+'api/web/product?page='+page).then(res => res.json())
   .then(res => res)
 }
 
@@ -96,72 +96,19 @@ function updateUI(products){
   productContainer.innerHTML = container
 }
 
-function paginate(p){
-  let firstPage = 1;
-  let lastPage = 0;
-  let num;
-  lastPage = p.last_page;
-  if(lastPage >= 5){
-    lastPage = 5
-  }
-  for (firstPage; firstPage <= lastPage; firstPage++) {
-    numberPaginate.innerHTML += showNumberPaginate(firstPage)
-  }
-  const pages = Array.from(document.querySelectorAll('.page-number'));
-  if(p.first_page == 1){
-    pages[0].classList.add("active")
-  }
-
-  nextPage.addEventListener('click', async function(){
-    const pageLink = await paginateNumber(num+1);
-    if(pageLink.paginate.current_page > 5){
-      firstPage = lastPage-4;
-      lastPage = pageLink.paginate.last_page;
-      for (firstPage; firstPage <= lastPage; firstPage++) {
-        numberPaginate.innerHTML = showNumberPaginate(firstPage)
-      }
-    }
-    if(pageLink.paginate.next_page){
-      updateUI(pageLink);
-      num = pageLink.paginate.current_page
-      if (num == pageLink.paginate.current_page) {
-        pages.forEach(p => p.classList.remove("active"))
-        pages[num-1].classList.add("active");
-      }
-    }
-  })
-
-  prevPage.addEventListener('click', async function(){
-    const pageLink = await paginateNumber(num-1);
-    updateUI(pageLink);
+nextPage.addEventListener('click', async function(){
+  const pageLink = await paginateNumber(num+1);
+  if(pageLink.data.length > 0){
     num = pageLink.paginate.current_page
-    if (num == pageLink.paginate.current_page) {
-      pages.forEach(p => p.classList.remove("active"))
-      pages[num-1].classList.add("active");
-      }
-  })
+    updateUI(pageLink);
+  }
+})
 
-  pages.forEach(button => {
-    button.addEventListener('click', async function(e){
-      const page = e.target.dataset.link;
-      const pageLink = await paginateNumber(page);
-      updateUI(pageLink);
-      num = pageLink.paginate.current_page;
-      if (page == pageLink.paginate.current_page) {
-        pages.forEach(p => p.classList.remove("active"))
-        pages[page-1].classList.add("active");
-      }
-    })
-  })
-
-}
-
-
-function showNumberPaginate(i){
-  return `<li class="page-number page-item" data-number="${i}">
-  <button class="page-link" data-link="${i}" href="javascript: void(0);">${i}</button>
-  </li>`
-}
+prevPage.addEventListener('click', async function(){
+  const pageLink = await paginateNumber(num-1);
+    num = pageLink.paginate.current_page
+    updateUI(pageLink);
+})
 
 function showCategory(c){
   return `<option value="${c.id}">${c.name}</option>`

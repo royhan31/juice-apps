@@ -1,8 +1,10 @@
+
 <?php
 
 use Illuminate\Http\Request;
 
 Route::post('/login','Admin\AuthController@login');
+
 
 Route::get('/category','Admin\CategoryController@index');
 Route::get('/category/{category}','Admin\CategoryController@show');
@@ -23,6 +25,7 @@ Route::put('/branch/{branch}','Admin\BranchController@update');
 Route::delete('/branch/{branch}','Admin\BranchController@destroy');
 
 Route::get('/product','Admin\ProductController@index');
+Route::get('/web/product','Admin\ProductController@webIndex');
 Route::post('/product','Admin\ProductController@store');
 Route::get('/product/category/{id}','Admin\ProductController@showByCategory');
 
