@@ -35,7 +35,7 @@ class ProductController extends Controller
 
   public function webIndex(){
     $results = [];
-    $products = Product::where('status', true)->Paginate(2);
+    $products = Product::where('status', true)->Paginate(4);
     $paginate = $this->productPaginate($products);
     foreach ($products as $p) {$results[] = $p->products($p);}
     return response()->json([
