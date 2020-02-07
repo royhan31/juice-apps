@@ -1,6 +1,4 @@
 const inputSearch = document.getElementById("search");
-// const url = "http://localhost:8000/";
-const url = "https://juice-apps.herokuapp.com/"
 const addCategory = document.querySelector('.btn-add');
 const inputCategory = document.querySelector('.input-add');
 const apiToken = document.querySelector('.api-token').dataset.token;
@@ -81,11 +79,11 @@ addCategory.addEventListener('click', function(){
   let err;
   if(inputCategory.value == ''){
     inputCategory.classList.add('is-invalid')
-    err = `<strong><p style="color: red">Masukan nama kategori</p></strong>`
+    err = `<strong><p style="color: red">Nama kategori tidak boleh kosong</p></strong>`
     inputErr.innerHTML = err
   }else if(inputCategory.value.length < 3) {
     inputCategory.classList.add('is-invalid')
-    err = `<strong><p style="color: red">Nama kategori minimal 3 huruf</p></strong>`
+    err = `<strong><p style="color: red">Nama kategori terlalu pendek</p></strong>`
     inputErr.innerHTML = err
   }
   else {
@@ -111,6 +109,7 @@ document.addEventListener('click', async function(e){
   let modalTitle = document.querySelector('.modal-title');
   const id = e.target.dataset.id;
   if(e.target.classList.contains('btn-edit')){
+    alert(id)
     const categoryDetail = await getCategoryDetail(id);
     updateUIDetail(categoryDetail);
     modalTitle.innerHTML = "Edit Kategori"
@@ -121,17 +120,17 @@ document.addEventListener('click', async function(e){
     let err;
     if(inputNameEdit.value == ''){
       inputNameEdit.classList.add('is-invalid')
-      err = `<strong><p style="color: red">Masukan nama kategori</p></strong>`
+      err = `<strong><p style="color: red">Nama kategori tidak boleh kosong</p></strong>`
       inputErr.innerHTML = err
     }
-
-    if(inputNameEdit.value.length < 3) {
+    else if(inputNameEdit.value.length < 3) {
       inputNameEdit.classList.add('is-invalid')
-      err = `<strong><p style="color: red">Nama kategori minimal 3 huruf</p></strong>`
+      err = `<strong><p style="color: red">Nama kategori terlalu pendek</p></strong>`
       inputErr.innerHTML = err
     }else {
       const data = {name: inputNameEdit.value}
       updateCategory(id, data);
+      document.querySelector('.close').click();
     }
   }
   if(e.target.classList.contains('btn-delete')){
@@ -154,8 +153,8 @@ document.addEventListener('click', async function(e){
 
 function updateUIDetail(data){
     const catDetail = showCategory(data);
-    const modabBody = document.querySelector('.modal-body');
-    modabBody.innerHTML = catDetail
+    const modalBody = document.querySelector('.modal-body');
+    modalBody.innerHTML = catDetail
 }
 
 
@@ -164,10 +163,12 @@ function updateUIDetail(data){
          <td>${no}</td>
          <td>${c.name}</td>
          <td>
-         <button type="button" data-id="${c.id}" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn-edit btn btn-warning btn-sm waves-effect waves-light">
+         <button type="button" data-id="${c.id}" data-toggle="modal" data-target=".bs-example-modal-sm" class="btn-edit btn btn-warning btn-xs waves-effect waves-light">
          Edit
          </button>
-         <button type="button" data-id="${c.id}" data-name="${c.name}" class="btn-delete btn btn-danger btn-sm waves-effect waves-light">Hapus</i></button>
+         <button type="button" data-id="${c.id}" data-name="${c.name}" class="btn-delete btn btn-danger btn-xs waves-effect waves-light">
+         Hapus
+         </i></button>
          </td>
      </tr>`
   };
@@ -182,7 +183,7 @@ function updateUIDetail(data){
       </div>
       <div class="col-4 pull-right">
           <div class="form-group">
-          <button type="button" data-id="${c.id}" data-dismiss="modal" class="btn-form-edit btn btn-warning waves-effect waves-light">
+          <button type="button" data-id="${c.id}" class="btn-form-edit btn btn-warning waves-effect waves-light">
           Edit
           </button>
           </div>

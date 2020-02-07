@@ -16,8 +16,8 @@
                 <span> Kategori </span>
             </a>
         </li>
-        <li class="active">
-            <a href="">
+        <li class="@if(Request::is('produk')) active @endif">
+            <a href="{{route('product')}}">
                 <i class="fe-clipboard"></i>
                 <span> Produk </span>
             </a>

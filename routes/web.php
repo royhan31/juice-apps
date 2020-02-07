@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -23,3 +24,4 @@ Route::get('test', function () {
 Route::post('/login','Admin\AuthController@webLogin')->name('web-login');
 Route::get('/beranda', 'HomeController@index')->name('dashboard');
 Route::get('/kategori', 'HomeController@category')->name('category');
+Route::get('/produk', 'HomeController@product')->name('product');

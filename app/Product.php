@@ -31,4 +31,8 @@ class Product extends Model
       ];
     }
 
+    public function productPaginate($products){
+      return $products;
+    }
+
 }
