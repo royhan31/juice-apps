@@ -45,14 +45,7 @@
 <div class="row">
     <div class="col-12">
         <ul class="pagination pagination-rounded justify-content-center mb-3">
-            <li class="page-item">
-                <button class="prev-page page-link"><span>«</span></button>
-            </li>
-            <ul class="number-paginate pagination">
-            </ul>
-            <li class="page-item">
-                <button class="next-page page-link"><span>»</span></button>
-            </li>
+
         </ul>
     </div> <!-- end col-->
 </div>
@@ -61,16 +54,13 @@ const urlImages = url+"images/";
 const productContainer = document.querySelector('.product-container');
 const numberPaginate = document.querySelector('.number-paginate');
 const selectCategory = document.querySelector('.category-select');
-const nextPage = document.querySelector('.next-page');
-const prevPage = document.querySelector('.prev-page');
+const paginationContainer = document.querySelector('.pagination');
 let num = 1;
 
 
 function getProduct(){
     return fetch(url+'api/web/product').then(res => res.json())
-    .then(res => {
-      updateUI(res);
-    });
+    .then(res => updateUI(res));
 }
 
 function getCategory(){
@@ -80,7 +70,7 @@ function getCategory(){
     res.data.forEach(c => {
       option += showCategory(c);
     })
-    selectCategornerHTML = option
+    selectCategory.innerHTML = option
   })
 }
 
@@ -92,26 +82,45 @@ function paginateNumber(page){
 
 function updateUI(products){
   let container = ``;
-  products.data.forEach(p => container += showProduct(p))
-  productContainer.innerHTML = container
+  if(products.data.length > 0){
+    products.data.forEach(p => container += showProduct(p))
+    productContainer.innerHTML = container
+    if(products.paginate.last_page > 1){
+      paginationContainer.innerHTML = showPagination()
+    }
+  }else{
+    const noProduct = `<div class="col-12 text-center mt-5">
+      <h3><b>Belum ada produk</b></h3>
+   </div>`
+   productContainer.innerHTML = noProduct
+  }
 }
 
-nextPage.addEventListener('click', async function(){
+async function nextPage(){
   const pageLink = await paginateNumber(num+1);
   if(pageLink.data.length > 0){
     num = pageLink.paginate.current_page
     updateUI(pageLink);
   }
-})
+}
 
-prevPage.addEventListener('click', async function(){
+async function prevPage(){
   const pageLink = await paginateNumber(num-1);
     num = pageLink.paginate.current_page
     updateUI(pageLink);
-})
+}
 
 function showCategory(c){
   return `<option value="${c.id}">${c.name}</option>`
+}
+
+function showPagination(){
+  return `<li class="page-item">
+      <button class="page-link" onclick="prevPage()"><span>«</span></button>
+  </li>
+  <li class="page-item">
+      <button class="page-link" onclick="nextPage()"><span>»</span></button>
+  </li>`
 }
 
 function showProduct(p){
