@@ -27,7 +27,7 @@ class ProductController extends Controller
 
   public function index(){
     $results = [];
-    $products = Product::where('status', true)->Paginate(1);
+    $products = Product::where('status', true)->Paginate(4);
     $paginate = $this->productPaginate($products);
     foreach ($products as $p) {$results[] = $p->products($p);}
     return response()->json([
