@@ -24,14 +24,21 @@ Route::post('/branch','Admin\BranchController@store');
 Route::put('/branch/{branch}','Admin\BranchController@update');
 Route::delete('/branch/{branch}','Admin\BranchController@destroy');
 
-Route::get('/product','Admin\ProductController@index');
-Route::get('/web/product','Admin\ProductController@webIndex');
-Route::post('/product','Admin\ProductController@store');
-Route::get('/product/category/{id}','Admin\ProductController@showByCategory');
+Route::get('/product','Consumer\ProductController@index');
+Route::get('/product/category/{id}','Consumer\ProductController@showByCategory');
+Route::get('/product/search/{keyword}','Consumer\ProductController@search');
 
 
+Route::group(['prefix' => 'admin'], function(){
+  Route::get('/product','Admin\ProductController@index');
+  Route::get('/product/category/{id}','Admin\ProductController@showByCategory');
+  Route::post('/product','Admin\ProductController@store');
+  Route::get('/product/search/{keyword}','Admin\ProductController@search');
+});
+// Route::post('/admin/product','Admin\ProductController@store');
 
 Route::post('test', 'Consumer\OrderController@store');
+
 
 // Route::post('test', function () {
 //     event(new App\Events\Order('Someone',3,1));

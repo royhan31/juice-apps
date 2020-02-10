@@ -19,7 +19,7 @@
                </div>
                <div class="col-6">
                    <div class="text-right">
-                       <h3 class="text-dark mt-1"><span data-plugin="counterup">0</span></h3>
+                       <h3 class="text-dark mt-1"><span data-plugin="counterup">{{count($products)}}</span></h3>
                        <p class="text-muted mb-1 text-truncate">Produk</p>
                    </div>
                </div>
@@ -37,7 +37,7 @@
                </div>
                <div class="col-6">
                    <div class="text-right">
-                       <h3 class="text-dark mt-1"><span data-plugin="counterup">825</span></h3>
+                       <h3 class="text-dark mt-1"><span data-plugin="counterup">{{count($branches)}}</span></h3>
                        <p class="text-muted mb-1 text-truncate">Cabang</p>
                    </div>
                </div>
@@ -54,7 +54,7 @@
                </div>
                <div class="col-6">
                    <div class="text-right">
-                       <h3 class="text-dark mt-1"><span data-plugin="counterup">1,845</span></h3>
+                       <h3 class="text-dark mt-1"><span data-plugin="counterup">{{count($orders)}}</span></h3>
                        <p class="text-muted mb-1 text-truncate">Pesanan</p>
                    </div>
                </div>
@@ -62,5 +62,8 @@
        </div> <!-- end widget-rounded-circle-->
    </div> <!-- end col-->
   </div>
+
+@endsection
+@section('script')
 
 @endsection

@@ -70,5 +70,7 @@
    </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
  <!-- end row-->
+@endsection
+@section('script')
 <script src="{{asset('assets/js/pages/category.js')}}"></script>
 @endsection

@@ -24,18 +24,7 @@ class ProductController extends Controller
 
   public function index(){
     $results = [];
-    $products = Product::where('status', true)->get();
-    foreach ($products as $p) {$results[] = $p->products($p);}
-    return response()->json([
-      'message' => 'success',
-      'status' => true,
-      'data' => $results
-    ]);
-  }
-
-  public function webIndex(){
-    $results = [];
-    $products = Product::where('status', true)->Paginate(4);
+    $products = Product::where('status', true)->orderBy('id','DESC')->Paginate(4);
     $paginate = $this->productPaginate($products);
     foreach ($products as $p) {$results[] = $p->products($p);}
     return response()->json([
@@ -112,23 +101,35 @@ class ProductController extends Controller
 
   public function showByCategory($id){
     $results = [];
-    $products = Product::where('status', true)->where('category_id', $id)->get();
-
-    foreach ($products as $p) {
-      $results[] = [
-          'id' => $p->id,
-          'name' => $p->name,
-          'category' => $p->category->name,
-          'price' => $p->price,
-          'image' => $p->image,
-          'description' => $p->description,
-      ];
-    }
-
+    $products = Product::where('status', true)->where('category_id', $id)
+                        ->orderBy('id','DESC')->paginate(4);
+    $paginate = $this->productPaginate($products);
+    foreach ($products as $p) {$results[] = $p->products($p);}
     return response()->json([
       'message' => 'success',
       'status' => true,
-      'data' => $results
+      'data' => $results,
+      'paginate' => $paginate
+    ]);
+  }
+
+  public function search($keyword){
+    $results = [];
+    $products;
+    if(config('app.env') === 'production') {
+    $products = Product::where('status', true)->where('name','ILIKE','%'.$keyword.'%')
+                ->orderBy('id','DESC')->Paginate(4);
+    }else{
+    $products = Product::where('status', true)->where('name','LIKE','%'.$keyword.'%')
+                  ->orderBy('id','DESC')->Paginate(4);
+    }
+    $paginate = $this->productPaginate($products);
+    foreach ($products as $p) {$results[] = $p->products($p);}
+    return response()->json([
+      'message' => 'success',
+      'status' => true,
+      'data' => $results,
+      'paginate' => $paginate
     ]);
   }
 
