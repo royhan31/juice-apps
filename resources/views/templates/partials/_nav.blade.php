@@ -24,7 +24,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item active">
                         <div class="notify-icon">
-                            <img src="assets/images/users/user-1.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <img src="{{ asset('assets/images/users/user-1.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
                         <p class="notify-details">Cristina Pride</p>
                         <p class="text-muted mb-0 user-msg">
                             <small>Hi, How are you? What about our next meeting</small>
@@ -43,7 +43,7 @@
 
         <li class="dropdown notification-list">
             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                <img src="assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                <img src="{{ asset('assets/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle">
                 <span class="pro-user-name ml-1">
                     {{Auth::user()->name}} <i class="mdi mdi-chevron-down"></i>
                 </span>
@@ -79,12 +79,12 @@
     <div class="logo-box">
         <a href="index.html" class="logo text-center">
             <span class="logo-lg">
-                <img src="assets/images/logo-light.png" alt="" height="18">
+                <img src="{{ asset('assets/images/logo-light.png')}}" alt="" height="18">
                 <!-- <span class="logo-lg-text-light">UBold</span> -->
             </span>
             <span class="logo-sm">
                 <!-- <span class="logo-sm-text-dark">U</span> -->
-                <img src="assets/images/logo-sm.png" alt="" height="24">
+                <img src="{{ asset('assets/images/logo-sm.png')}}" alt="" height="24">
             </span>
         </a>
     </div>

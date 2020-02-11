@@ -10,10 +10,10 @@ use Storage;
 
 class ProductController extends Controller
 {
-  // public function __construct()
-  // {
-  //     $this->middleware('auth:api')->except('index');
-  // }
+  public function __construct()
+  {
+      $this->middleware('auth:api')->except('index');
+  }
 
   public function productPaginate($products){
     return [
@@ -38,7 +38,7 @@ class ProductController extends Controller
   public function store(Request $request){
     $rule = [
       'name' => 'required|min:3|max:100',
-      'price' => 'required|numeric|between:100,1000000',
+      'price' => 'required',
       'description' => 'required',
       'image' => 'required|mimes:jpeg,jpg,png|max:2048',
       'category_id' => 'required'

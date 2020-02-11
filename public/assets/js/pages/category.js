@@ -1,7 +1,6 @@
 const inputSearch = document.getElementById("search");
 const addCategory = document.querySelector('.btn-add');
 const inputCategory = document.querySelector('.input-add');
-const apiToken = document.querySelector('.api-token').dataset.token;
 
 function getCategory(){
   fetch(url+'api/category').then(res => res.json()).then(res => updateUI(res.data));
@@ -17,9 +16,7 @@ function getCategoryDetail(id){
 function storeCategory(data){
   return fetch(url+'api/category', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json',
-    'Authorization' : 'Bearer '+apiToken
-  },
+    headers: { 'Content-Type': 'application/json','Authorization' : 'Bearer '+apiToken },
     body: JSON.stringify(data)
   }).then(res => res.json())
   .then(res => {

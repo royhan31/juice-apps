@@ -27,20 +27,18 @@ Route::delete('/branch/{branch}','Admin\BranchController@destroy');
 Route::get('/product','Consumer\ProductController@index');
 Route::get('/product/category/{id}','Consumer\ProductController@showByCategory');
 Route::get('/product/search/{keyword}','Consumer\ProductController@search');
+// Route::post('/produk/tambah','Admin\ProductController@store');
 
-
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => '/admin'], function(){
   Route::get('/product','Admin\ProductController@index');
   Route::get('/product/category/{id}','Admin\ProductController@showByCategory');
-  Route::post('/product','Admin\ProductController@store');
   Route::get('/product/search/{keyword}','Admin\ProductController@search');
+  Route::post('/product','Admin\ProductController@store');
 });
-// Route::post('/admin/product','Admin\ProductController@store');
-
-Route::post('test', 'Consumer\OrderController@store');
+// Route::post('test', 'Consumer\OrderController@store');
 
 
-// Route::post('test', function () {
+// Route::get('test', function () {
 //     event(new App\Events\Order('Someone',3,1));
 //     return "Event has been sent!";
 // });

@@ -16,5 +16,9 @@
     <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
-    <script>const url = "{{ config('app.url') }}";</script>
+    <script>const url = "{{ config('app.url') }}";
+    @auth
+    const apiToken = "{{Auth::user()->api_token}}";
+    @endauth
+    </script>
 </head>

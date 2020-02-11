@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Branch;
 use App\Order;
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -24,4 +25,11 @@ class HomeController extends Controller
     public function category(){return view('home.category');}
 
     public function product(){return view('home.product.product');}
+
+    public function productCreate(){
+      $categories = Category::orderBy('name', 'ASC')->get();
+      // dd($categories);
+      return view('home.product.create', compact('categories'));
+    }
+
 }

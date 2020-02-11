@@ -105,7 +105,7 @@
 
      branch.addEventListener('change', function() {
        if(!this.value == ''){
-          var channel = pusher.subscribe('product-order'+this.value);
+          var channel = pusher.subscribe('product-order-'+this.value);
           console.log(channel);
           channel.bind('App\\Events\\Order', function(data) {
             var existingNotifications = notifications.html();

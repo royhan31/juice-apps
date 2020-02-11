@@ -4,7 +4,6 @@
 
   @include('templates.partials._head')
     <body>
-      <div class="api-token" data-token="{{Auth::user()->api_token}}"></div>
         <!-- Begin page -->
         <div id="wrapper">
 

@@ -16,12 +16,17 @@ Route::get('/', function () {
     return view('login');
 })->name('login')->middleware('guest');
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 Route::get('test', function () {
-    event(new App\Events\StatusLiked('Someone'));
-    return "Event has been sent!";
+  event(new App\Events\Order('Someone',3,1));
+  return "Event has been sent!";
 });
 
 Route::post('/login','Admin\AuthController@webLogin')->name('web-login');
 Route::get('/beranda', 'HomeController@index')->name('dashboard');
 Route::get('/kategori', 'HomeController@category')->name('category');
 Route::get('/produk', 'HomeController@product')->name('product');
+Route::get('/produk/tambah', 'HomeController@productCreate')->name('productCreate');

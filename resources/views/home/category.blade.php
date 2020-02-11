@@ -13,12 +13,12 @@
       <div class="card-box">
         <div class="row">
           <div class="col-6">
-             <form class="form-inline">
+             <div class="form-inline">
                  <div class="form-group">
                      <input type="text" class="input-add form-control" placeholder="Masukan Kategori">
                  </div>
                   <div class="input-error"></div>
-             </form>
+             </div>
          </div>
         <div class="col-6">
           <div class="text-lg-right mt-lg-0">

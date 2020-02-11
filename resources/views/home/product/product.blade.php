@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="text-lg-right mt-3 mt-lg-0">
-                        <a href="" class="btn btn-info waves-effect waves-light"><i class="mdi mdi-plus-circle mr-1"></i>Tambah</a>
+                        <a href="{{route('productCreate')}}" class="btn btn-info waves-effect waves-light"><i class="mdi mdi-plus-circle mr-1"></i>Tambah</a>
                     </div>
                 </div><!-- end col-->
             </div> <!-- end row -->
