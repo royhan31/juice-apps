@@ -28,6 +28,7 @@ class Product extends Model
           'price' => $p->price,
           'image' => $p->image,
           'description' => $p->description,
+          'status' => $p->status
       ];
     }
 

@@ -32,4 +32,10 @@ class HomeController extends Controller
       return view('home.product.create', compact('categories'));
     }
 
+    public function productEdit($id){
+      $categories = Category::orderBy('name', 'ASC')->get();
+      $product = Product::find($id);
+      return view('home.product.edit', compact('categories', 'product'));
+    }
+
 }

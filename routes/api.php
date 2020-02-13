@@ -34,6 +34,8 @@ Route::group(['prefix' => '/admin'], function(){
   Route::get('/product/category/{id}','Admin\ProductController@showByCategory');
   Route::get('/product/search/{keyword}','Admin\ProductController@search');
   Route::post('/product','Admin\ProductController@store');
+  Route::post('/product/{id}','Admin\ProductController@update');
+
 });
 // Route::post('test', 'Consumer\OrderController@store');
 

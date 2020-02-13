@@ -149,7 +149,7 @@ function showProduct(p){
   return `<div class="col-md-6 col-xl-3">
       <div class="card-box product-box">
           <div class="product-action">
-              <button onclick="window.location='/kategori'" class="btn-edit btn btn-success btn-xs waves-effect waves-light"><i class="mdi mdi-pencil"></i></button>
+              <button onclick="window.location='/produk/edit/${p.id}'" class="btn-edit btn btn-success btn-xs waves-effect waves-light"><i class="mdi mdi-pencil"></i></button>
               <button onclick="window.location='/kategori'" class="btn btn-danger btn-xs waves-effect waves-light"><i class="mdi mdi-close"></i></button>
           </div>
 
@@ -169,6 +169,7 @@ function showProduct(p){
                       </div>
                   </div>
               </div> <!-- end row -->
+              <span class="badge badge-pill badge-${p.status ? 'success' : 'danger'}">${p.status ? 'Aktif' : 'Tidak aktif'}</span>
           </div> <!-- end product info-->
       </div> <!-- end card-box-->
   </div> <!-- end col-->`

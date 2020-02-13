@@ -40,13 +40,11 @@ class ProductController extends Controller
     $products = Product::where('status', true)->where('name','LIKE','%'.$request->keyword.'%')
                   ->orderBy('id','DESC')->get();
     }
-    $paginate = $this->productPaginate($products);
     foreach ($products as $p) {$results[] = $p->products($p);}
     return response()->json([
       'message' => 'success',
       'status' => true,
-      'data' => $results,
-      'paginate' => $paginate
+      'data' => $results
     ]);
   }
 }
