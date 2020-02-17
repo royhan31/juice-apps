@@ -22,7 +22,7 @@
             </a>
         </li>
         <li>
-            <a class="active" href="">
+            <a class="@if(Request::is('toping')) active @endif" href="{{route('toping')}}">
                 <i class="fe-layers"></i>
                 <span> Toping </span>
             </a>

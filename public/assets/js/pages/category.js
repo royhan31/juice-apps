@@ -60,7 +60,6 @@ function deleteCategory(id, name){
     headers: { 'Authorization' : 'Bearer '+apiToken },
   }).then(res => res.json())
   .then(res => {
-    // console.log(res);
     const success = "Kategori "+name+" berhasil dihapus";
     if(res.status){
       Swal.fire({ title: "Berhasil",text: success,type: "success"})
@@ -106,7 +105,6 @@ document.addEventListener('click', async function(e){
   let modalTitle = document.querySelector('.modal-title');
   const id = e.target.dataset.id;
   if(e.target.classList.contains('btn-edit')){
-    alert(id)
     const categoryDetail = await getCategoryDetail(id);
     updateUIDetail(categoryDetail);
     modalTitle.innerHTML = "Edit Kategori"

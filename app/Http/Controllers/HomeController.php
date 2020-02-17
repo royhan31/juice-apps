@@ -38,4 +38,9 @@ class HomeController extends Controller
       return view('home.product.edit', compact('categories', 'product'));
     }
 
+    public function toping(){
+      $categories = Category::orderBy('name', 'ASC')->get();
+      return view('home.toping', compact('categories'));
+    }
+
 }

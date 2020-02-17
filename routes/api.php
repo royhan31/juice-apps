@@ -16,8 +16,10 @@ Route::delete('/category/{category}','Admin\CategoryController@destroy');
 Route::get('/toping','Admin\TopingController@index');
 Route::get('/toping/category/{id}','Admin\TopingController@showByCategory');
 Route::post('/toping','Admin\TopingController@store');
-Route::put('/toping/{toping}','Admin\TopingController@update');
-Route::delete('/toping/{toping}','Admin\TopingController@destroy');
+Route::get('/toping/{id}','Admin\TopingController@show');
+
+// Route::put('/toping/{id}','Admin\TopingController@update');
+// Route::delete('/toping/{id}','Admin\TopingController@destroy');
 
 Route::get('/branch','Admin\BranchController@index');
 Route::post('/branch','Admin\BranchController@store');

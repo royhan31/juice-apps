@@ -21,6 +21,11 @@ class TopingController extends Controller
     return response()->json(['message' => 'success','status' => true,'data' => $results]);
   }
 
+  public function show($id){
+    $toping = Toping::find($id);
+    return response()->json(['message' => 'success','status' => true,'data' => $toping]);
+  }
+
   public function showByCategory($id){
     $topings = Toping::where('category_id', $id)->orderBy('name', 'ASC')->get();
     $results = [];
@@ -32,7 +37,7 @@ class TopingController extends Controller
     $rule = [
       'name' => 'required|min:3|max:30',
       'category' => 'required',
-      'price' => 'required|digits:5',
+      'price' => 'required',
     ];
     $message = [
       'required' => 'Isi bidang ini.',
@@ -52,9 +57,7 @@ class TopingController extends Controller
       return response()->json([
         'message' => 'failed',
         'status' => false,
-        'errors' => [
-          'name' => [ 'Nama Toping '.$name.' dengan kategori '
-          .$topingName->category->name.' sudah ada.']]
+        'errors' => 'Nama Toping '.$name.' dengan kategori '.$topingName->category->name.' sudah ada.'
       ]);
     }
 

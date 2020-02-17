@@ -18,8 +18,8 @@ class CreateTopingOrdersTable extends Migration
           $table->integer('toping_id')->unsigned();
           $table->integer('price');
 
-          $table->foreign('product_order_id')->references('id')->on('product_orders');
-          $table->foreign('toping_id')->references('id')->on('topings');
+          $table->foreign('product_order_id')->references('id')->on('product_orders')->onDelete('cascade');
+          $table->foreign('toping_id')->references('id')->on('topings')->onDelete('cascade');
         });
     }
 

@@ -9,10 +9,10 @@ use App\Product;
 
 class CategoryController extends Controller
 {
-  public function __construct()
-  {
-      $this->middleware('auth:api')->except(['index', 'search']);
-  }
+  // public function __construct()
+  // {
+  //     $this->middleware('auth:api')->except(['index', 'search']);
+  // }
 
   public function index(){
     $categories = Category::orderBy('name', 'ASC')->get();
