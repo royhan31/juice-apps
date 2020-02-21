@@ -158,7 +158,7 @@ document.addEventListener('click', async function(e){
   if(e.target.classList.contains('btn-delete')){
     const name = e.target.dataset.name;
     Swal.fire({
-                title: "Hapus Kategori",
+                title: "Hapus Toping",
                 text: "Apakah anda yakin menghapus toping "+name+"?",
                 type: "warning",
                 showCancelButton: !0,
