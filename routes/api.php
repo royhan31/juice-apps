@@ -17,6 +17,7 @@ Route::get('/toping','Admin\TopingController@index');
 Route::get('/toping/category/{id}','Admin\TopingController@showByCategory');
 Route::post('/toping','Admin\TopingController@store');
 Route::get('/toping/{id}','Admin\TopingController@show');
+Route::delete('/toping/{id}','Admin\TopingController@destroy');
 
 // Route::put('/toping/{id}','Admin\TopingController@update');
 // Route::delete('/toping/{id}','Admin\TopingController@destroy');

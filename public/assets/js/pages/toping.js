@@ -60,14 +60,14 @@ function searchToping(keyword){
   .then(res => res.data);
 }
 
-function deleteCategory(id, name){
-  return fetch(url+'api/category/'+id, {
+function deleteToping(id, name){
+  return fetch(url+'api/toping/'+id, {
     method: 'DELETE',
     headers: { 'Authorization' : 'Bearer '+apiToken },
   }).then(res => res.json())
   .then(res => {
     // console.log(res);
-    const success = "Kategori "+name+" berhasil dihapus";
+    const success = "Toping "+name+" berhasil dihapus";
     if(res.status){
       Swal.fire({ title: "Berhasil",text: success,type: "success"})
       getToping()
@@ -159,7 +159,7 @@ document.addEventListener('click', async function(e){
     const name = e.target.dataset.name;
     Swal.fire({
                 title: "Hapus Kategori",
-                text: "Apakah anda yakin menghapus kategori "+name+"?",
+                text: "Apakah anda yakin menghapus toping "+name+"?",
                 type: "warning",
                 showCancelButton: !0,
                 cancelButtonText: "Batal",
@@ -167,8 +167,10 @@ document.addEventListener('click', async function(e){
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Hapus"
             }).then(t => {
-              deleteCategory(id, name);
-              getToping();
+              if(t.value){
+                deleteToping(id, name);
+                getToping();
+              }
             })
   }
 })

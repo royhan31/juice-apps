@@ -108,7 +108,8 @@ class TopingController extends Controller
     return response()->json(['message' => 'success','status' => true]);
   }
 
-  public function destroy(Toping $toping){
+  public function destroy($id){
+    $toping = Toping::find($id);
     $topingOrder = TopingOrder::where('toping_id', $toping)->first();
     $error = ['toping' => [ 'Toping '.$toping->name.' sedang digunakan.']];
 

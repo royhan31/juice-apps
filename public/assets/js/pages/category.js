@@ -140,8 +140,10 @@ document.addEventListener('click', async function(e){
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Hapus"
             }).then(t => {
+              if(t.value){
               deleteCategory(id, name);
               getCategory();
+              }
             })
   }
 })
