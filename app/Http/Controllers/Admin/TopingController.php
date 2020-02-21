@@ -110,7 +110,7 @@ class TopingController extends Controller
 
   public function destroy($id){
     $toping = Toping::find($id);
-    $topingOrder = TopingOrder::where('toping_id', $toping)->first();
+    $topingOrder = TopingOrder::where('toping_id', $toping->id)->first();
     $error = ['toping' => [ 'Toping '.$toping->name.' sedang digunakan.']];
 
     if($topingOrder){
