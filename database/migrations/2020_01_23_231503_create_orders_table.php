@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('branch_id')->unsigned();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
 

@@ -32,3 +32,4 @@ Route::get('/produk', 'HomeController@product')->name('product');
 Route::get('/produk/tambah', 'HomeController@productCreate')->name('productCreate');
 Route::get('/produk/edit/{id}', 'HomeController@productEdit')->name('productEdit');
 Route::get('/toping','HomeController@toping')->name('toping');
+Route::get('/cabang','HomeController@branch')->name('branch');

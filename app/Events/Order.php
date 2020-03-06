@@ -14,26 +14,17 @@ class Order implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $name;
-
     public $message;
-
-    public $branch;
-
-    public $amount;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($name, $amount, $branch)
+    public function __construct($orderProduct)
     {
-       $this->name = $name;
-       $this->amount = $amount;
-       $this->branch = $branch;
 
-       $this->message  = "{$amount} Pesanan dari {$name}";
+       $this->message  = $orderProduct;
     }
 
     /**
@@ -43,6 +34,6 @@ class Order implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['product-order-'.$this->branch];
+        return ['product-order'];
     }
 }

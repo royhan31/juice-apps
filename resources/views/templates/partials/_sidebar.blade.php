@@ -28,7 +28,7 @@
             </a>
         </li>
         <li>
-            <a class="active" href="">
+            <a class="@if(Request::is('cabang')) active @endif" href="{{route('branch')}}">
                 <i class="fe-home"></i>
                 <span> Cabang </span>
             </a>

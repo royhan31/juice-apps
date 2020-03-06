@@ -40,7 +40,7 @@ Route::group(['prefix' => '/admin'], function(){
   Route::post('/product/{id}','Admin\ProductController@update');
 
 });
-// Route::post('test', 'Consumer\OrderController@store');
+Route::post('order', 'Consumer\OrderController@store');
 
 
 // Route::get('test', function () {

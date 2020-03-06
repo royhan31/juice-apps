@@ -9,17 +9,16 @@ use App\Order;
 class OrderController extends Controller
 {
     public function store(Request $request){
-      $name = $request->name;
-      $branch = $request->branch_id;
-      $product = $request->$products;
+      $orderProduct = json_decode(json_encode($request->all()),true);
 
+      $order = new Order();
+      $order->sendNotifyOrders($orderProduct);
 
-      // $order = new Order();
-      // $order->sendNotifyOrders($name,$amount,$branch);
+      $data = (object) [];
       return response()->json([
         'message' => 'success',
-        'data' => $request->all()
-      ]);
-      // event(new App\Events\Order($name,$amount,$branch));
+        'status' => true,
+        'data' => $data
+      ], 201);
     }
 }
