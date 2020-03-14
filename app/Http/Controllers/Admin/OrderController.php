@@ -17,10 +17,27 @@ class OrderController extends Controller
       $orders = Order::orderBy('id','DESC')->get();
       $results = [];
       foreach ($orders as $order) {
+        $products = [];
+        foreach ($order->products as $p) {
+          $topings = [];
+          foreach ($p->topingOrders as $t) {
+            $topings[] = [
+              'name' => $t->toping->name,
+              'price' => $t->price
+            ];
+          }
+         $products[] = [
+             'name' => $p->product->name,
+             'price' => $p->price,
+             'topings' => $topings
+          ];
+        }
         $results[] = [
             'id' => $order->id,
             'name' => $order->name,
-            'branch' => $order->name,
+            'branch' => $order->branch->name,
+            'created_at' => $order->created_at,
+            'products' => $products
         ];
       }
       return response()->json([
@@ -51,7 +68,7 @@ class OrderController extends Controller
 
   public function showByDate($date){
     //format year-month-day
-    $orders = Order::->whereDate('created_at', $date)->get();
+    $orders = Order::whereDate('created_at', $date)->get();
     return response()->json([
       'message' => 'success',
       'status' => true,

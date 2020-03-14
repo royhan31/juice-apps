@@ -38,12 +38,8 @@ Route::group(['prefix' => '/admin'], function(){
   Route::get('/product/search/{keyword}','Admin\ProductController@search');
   Route::post('/product','Admin\ProductController@store');
   Route::post('/product/{id}','Admin\ProductController@update');
-
+  Route::get('/order', 'Admin\OrderController@index');
 });
 Route::post('order', 'Consumer\OrderController@store');
 
-
-// Route::get('test', function () {
-//     event(new App\Events\Order('Someone',3,1));
-//     return "Event has been sent!";
-// });
+Route::post('order/confirm','Cashier\OrderController@store');

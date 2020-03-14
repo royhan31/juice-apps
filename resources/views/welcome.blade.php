@@ -55,6 +55,7 @@
    </nav>
    <select id="branch">
    </select>
+   <p id="test">ahahhaha</p>
    <div class="mt-5">
      <div class="container">
        <div class="row">
@@ -161,6 +162,10 @@
      var channel = pusher.subscribe('product-order');
      // Bind a function to a Event (the full Laravel class)
      channel.bind('App\\Events\\Order', function(data) {
+       // const test = ducument.querySelector('#test');
+       let a = data.message[0];
+       console.log(a);
+       // test.innerText = data.message
        var existingNotifications = notifications.html();
        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
        var newNotificationHtml = `

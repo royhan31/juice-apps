@@ -14,12 +14,12 @@ class Order extends Model
       return event(new Events\Order($orderProduct));
     }
 
-    public function orderProducts(){
-      return $this->hasMany(OrderProduct::class, 'order_id','id');
+    public function products(){
+      return $this->hasMany(ProductOrder::class, 'order_id','id');
     }
 
     public function branch(){
-      return $this->belongsTo(branch::class, 'branch_id','id');
+      return $this->belongsTo(Branch::class, 'branch_id','id');
     }
 
     public function productCreated(){
