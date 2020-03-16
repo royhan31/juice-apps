@@ -18,7 +18,7 @@ class OrderController extends Controller
       return response()->json([
         'message' => 'success',
         'status' => true,
-        'data' => $orderProduct
+        'data' => $data
       ], 201);
     }
 }
