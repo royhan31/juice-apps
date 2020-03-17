@@ -22,6 +22,7 @@
                          <th></th>
                          <th>No</th>
                          <th>Nama Pembeli</th>
+                         <th>Cabang</th>
                          <th>Tanggal</th>
                          <th>Total Produk</th>
                          <th>Total Harga</th>
@@ -112,6 +113,7 @@
      <th width="30"> <i id="info" style="color: green" data-id="${i}" class="fe-plus-circle"></i> </th>
        <th scope="row">${i+1}</th>
        <td>${o.name}</td>
+       <td>${o.branch}</td>
        <td>${getDate(o.created_at)}</td>
        <td>${o.products.length}</td>
        <td><b>Rp. ${rupiah(priceTotalProducts(o.products))}</b></td>
@@ -137,8 +139,8 @@
     return `<tr class="table-info" data-id="${i}" style="display: none">
     <th scope="row"></th>
     <th scope="row">#</th>
-    <th scope="row">${p.name} Rp.${p.price}</th>
-    <td colspan="2">${p.topings.map(t => `${t.name} Rp. ${rupiah(t.price)}`)}</td>
+    <th scope="row">${p.name} Rp. ${p.price}</th>
+    <td colspan="3">${p.topings.map(t => `${t.name} Rp. ${rupiah(t.price)}`)}</td>
     <td>Rp. ${rupiah(priceTotalToping(p, p.topings) + p.price)}</td>
     </tr>`
   }
