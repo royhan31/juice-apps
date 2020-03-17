@@ -33,6 +33,12 @@
                 <span> Cabang </span>
             </a>
         </li>
+        <li>
+            <a class="@if(Request::is('laporan')) active @endif" href="{{route('order')}}">
+                <i class="fe-book"></i>
+                <span> Laporan </span>
+            </a>
+        </li>
 
     </ul>
 

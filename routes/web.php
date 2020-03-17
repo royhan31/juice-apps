@@ -16,14 +16,14 @@ Route::get('/', function () {
     return view('login');
 })->name('login')->middleware('guest');
 
-Route::get('/welcome', function () {
-    return view('welcome');
-});
+// Route::get('/welcome', function () {
+//     return view('welcome');
+// });
 
-Route::get('test', function () {
-  event(new App\Events\Order('Someone',3,1));
-  return "Event has been sent!";
-});
+// Route::get('test', function () {
+//   event(new App\Events\Order('Someone',3,1));
+//   return "Event has been sent!";
+// });
 
 Route::post('/login','Admin\AuthController@webLogin')->name('web-login');
 Route::get('/beranda', 'HomeController@index')->name('dashboard');
@@ -33,3 +33,4 @@ Route::get('/produk/tambah', 'HomeController@productCreate')->name('productCreat
 Route::get('/produk/edit/{id}', 'HomeController@productEdit')->name('productEdit');
 Route::get('/toping','HomeController@toping')->name('toping');
 Route::get('/cabang','HomeController@branch')->name('branch');
+Route::get('/laporan','HomeController@order')->name('order');

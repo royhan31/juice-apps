@@ -43,6 +43,10 @@ class HomeController extends Controller
       return view('home.toping', compact('categories'));
     }
 
+    public function order(){
+      return view('home.order');
+    }
+
     public function branch(){return view('home.branch');}
 
 }
