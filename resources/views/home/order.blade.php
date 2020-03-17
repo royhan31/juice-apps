@@ -39,7 +39,9 @@
 </div>
 <script>
   // console.log(url);
+  // const order = fetch('http://juice-apps.herokuapp.com/api/admin/order').then(res => res.json()).then(res => res.data);
   const order = fetch(url+'api/admin/order').then(res => res.json()).then(res => res.data);
+
   const orderTable = document.querySelector('#order-table');
 
   async function showData(){
@@ -86,13 +88,12 @@
 
   function priceTotalProducts(products){
     const priceProduct = products.map(p => p.price).reduce((a, b) => a+b, 0);
-    const topings = products.map((p, i) => p.topings).filter(t => t.length > 0).map(t => t);
-    const priceToping = topings.map(t => {
-      let price = t.map(t => t.price).reduce((a,b) => a + b) || 0
-      return price
-      // console.log(price);
+    let priceToping = 0;
+    products.forEach(p => {
+      if (p.topings.length > 0) {
+        priceToping += p.topings.map(t => t.price).reduce((a,b) => a+b, 0);
+      }
     })
-    .reduce((a,b) => a + b);
     return priceProduct+priceToping
   }
 
@@ -135,9 +136,9 @@
   function showChildRow(p, i){
     return `<tr class="table-info" data-id="${i}" style="display: none">
     <th scope="row"></th>
-    <th scope="row">${p.name}</th>
-    <th scope="row">${p.price}</th>
-    <td colspan="2">${p.topings.map(t => `${t.name} ${t.price}`)}</td>
+    <th scope="row">#</th>
+    <th scope="row">${p.name} Rp.${p.price}</th>
+    <td colspan="2">${p.topings.map(t => `${t.name} Rp. ${rupiah(t.price)}`)}</td>
     <td>Rp. ${rupiah(priceTotalToping(p, p.topings) + p.price)}</td>
     </tr>`
   }
