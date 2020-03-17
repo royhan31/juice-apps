@@ -89,9 +89,12 @@
     const topings = products.map((p, i) => p.topings).filter(t => t.length > 0).map(t => t);
     const priceToping = topings.map(t => {
       let price = t.map(t => t.price).reduce((a,b) => a + b)
-      return price
-    }).reduce((a,b) => a + b);
-    return priceProduct+priceToping
+      // return price
+      console.log(price);
+    })
+    // .reduce((a,b) => a + b);
+    return priceProduct
+    // +priceToping
   }
 
   function priceTotalToping(p,t){
