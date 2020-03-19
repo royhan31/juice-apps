@@ -159,7 +159,7 @@
        encrypted: true
      });
      // Subscribe to the channel we specified in our Laravel Event
-     var channel = pusher.subscribe('product-order');
+     var channel = pusher.subscribe('product-order-1');
      // Bind a function to a Event (the full Laravel class)
      channel.bind('App\\Events\\Order', function(data) {
        // const test = ducument.querySelector('#test');

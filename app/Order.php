@@ -10,8 +10,8 @@ class Order extends Model
 
     protected $guarded = [];
 
-    public function sendNotifyOrders($orderProduct){
-      return event(new Events\Order($orderProduct));
+    public function sendNotifyOrders($orderProduct, $branch){
+      return event(new Events\Order($orderProduct, $branch));
     }
 
     public function products(){

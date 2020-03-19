@@ -16,15 +16,17 @@ class Order implements ShouldBroadcast
 
     public $message;
 
+    public $branch;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($orderProduct)
+    public function __construct($orderProduct, $branch)
     {
-
        $this->message  = $orderProduct;
+       $this->branch = $branch;
     }
 
     /**
@@ -34,6 +36,6 @@ class Order implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return ['product-order'];
+        return ['product-order-'.$this->branch];
     }
 }

@@ -12,7 +12,7 @@ class OrderController extends Controller
       $orderProduct = json_decode(json_encode($request->all()),true);
 
       $order = new Order();
-      $order->sendNotifyOrders($orderProduct);
+      $order->sendNotifyOrders($orderProduct, $orderProduct["branch"]);
 
       $data = (object) [];
       return response()->json([
