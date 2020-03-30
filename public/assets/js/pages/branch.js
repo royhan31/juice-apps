@@ -6,24 +6,24 @@ function getBranch(){
   fetch(url+'api/branch').then(res => res.json()).then(res => updateUI(res.data));
 }
 
-function getCategoryDetail(id){
-  return fetch(url+'api/category/'+id, {
+function getBranchDetail(id){
+  return fetch(url+'api/branch/'+id, {
     headers: { 'Authorization' : 'Bearer '+apiToken }
   })
   .then(res => res.json()).then(res => res.data);
 }
 
-function storeCategory(data){
-  return fetch(url+'api/category', {
+function storeBrach(data){
+  return fetch(url+'api/branch', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json','Authorization' : 'Bearer '+apiToken },
     body: JSON.stringify(data)
   }).then(res => res.json())
   .then(res => {
-    const success = "Kategori "+data.name+" berhasil ditambahkan";
+    const success = "Cabang "+data.name+" berhasil ditambahkan";
     if(res.status){
       Swal.fire({ title: "Berhasil",text: success,type: "success"})
-      getCategory()
+      getBranch()
     }else {
       Swal.fire({ title: "Gagal",text: res.errors,type: "error"})
     }
@@ -31,7 +31,7 @@ function storeCategory(data){
 }
 
 function updateCategory(id, data){
-  return fetch(url+'api/category/'+id, {
+  return fetch(url+'api/branch/'+id, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json',
     'Authorization' : 'Bearer '+apiToken
@@ -39,10 +39,10 @@ function updateCategory(id, data){
     body: JSON.stringify(data)
   }).then(res => res.json())
   .then(res => {
-    const success = "Kategori "+data.name+" berhasil diubah";
+    const success = "Cabang "+data.name+" berhasil diubah";
     if(res.status){
       Swal.fire({ title: "Berhasil",text: success,type: "success"})
-      getCategory()
+      getBranch()
     }else {
       Swal.fire({ title: "Gagal",text: res.errors,type: "error"})
     }
@@ -50,20 +50,20 @@ function updateCategory(id, data){
 }
 
 function searchCategory(keyword){
-  return fetch(url+'api/category/search/'+keyword).then(res => res.json())
+  return fetch(url+'api/branch/search/'+keyword).then(res => res.json())
   .then(res => res.data);
 }
 
 function deleteCategory(id, name){
-  return fetch(url+'api/category/'+id, {
+  return fetch(url+'api/branch/'+id, {
     method: 'DELETE',
     headers: { 'Authorization' : 'Bearer '+apiToken },
   }).then(res => res.json())
   .then(res => {
-    const success = "Kategori "+name+" berhasil dihapus";
+    const success = "Cabang "+name+" berhasil dihapus";
     if(res.status){
       Swal.fire({ title: "Berhasil",text: success,type: "success"})
-      getCategory()
+      getBranch()
     }else {
       Swal.fire({ title: "Gagal",text: res.errors,type: "error"})
     }
@@ -75,16 +75,16 @@ addCategory.addEventListener('click', function(){
   let err;
   if(inputCategory.value == ''){
     inputCategory.classList.add('is-invalid')
-    err = `<strong><p style="color: red">Nama kategori tidak boleh kosong</p></strong>`
+    err = `<strong><p style="color: red">Nama Cabang tidak boleh kosong</p></strong>`
     inputErr.innerHTML = err
   }else if(inputCategory.value.length < 3) {
     inputCategory.classList.add('is-invalid')
-    err = `<strong><p style="color: red">Nama kategori terlalu pendek</p></strong>`
+    err = `<strong><p style="color: red">Nama Cabang terlalu pendek</p></strong>`
     inputErr.innerHTML = err
   }
   else {
     const data = {name: inputCategory.value}
-    storeCategory(data);
+    storeBrach(data);
     inputCategory.classList.remove('is-invalid')
     inputCategory.value = ''
     inputErr.innerHTML = ''
@@ -97,7 +97,7 @@ inputSearch.addEventListener('change', async function(){
     const searchData = await searchCategory(keyword);
     return updateUI(searchData);
   }else {
-    return getCategory()
+    return getBranch()
   }
 })
 
@@ -105,9 +105,9 @@ document.addEventListener('click', async function(e){
   let modalTitle = document.querySelector('.modal-title');
   const id = e.target.dataset.id;
   if(e.target.classList.contains('btn-edit')){
-    const categoryDetail = await getCategoryDetail(id);
+    const categoryDetail = await getBranchDetail(id);
     updateUIDetail(categoryDetail);
-    modalTitle.innerHTML = "Edit Kategori"
+    modalTitle.innerHTML = "Edit Cabang"
   }
   if(e.target.classList.contains('btn-form-edit')){
     const inputNameEdit = document.querySelector('.name-edit');
@@ -115,12 +115,12 @@ document.addEventListener('click', async function(e){
     let err;
     if(inputNameEdit.value == ''){
       inputNameEdit.classList.add('is-invalid')
-      err = `<strong><p style="color: red">Nama kategori tidak boleh kosong</p></strong>`
+      err = `<strong><p style="color: red">Nama cabang tidak boleh kosong</p></strong>`
       inputErr.innerHTML = err
     }
     else if(inputNameEdit.value.length < 3) {
       inputNameEdit.classList.add('is-invalid')
-      err = `<strong><p style="color: red">Nama kategori terlalu pendek</p></strong>`
+      err = `<strong><p style="color: red">Nama cabang terlalu pendek</p></strong>`
       inputErr.innerHTML = err
     }else {
       const data = {name: inputNameEdit.value}
@@ -131,8 +131,8 @@ document.addEventListener('click', async function(e){
   if(e.target.classList.contains('btn-delete')){
     const name = e.target.dataset.name;
     Swal.fire({
-                title: "Hapus Kategori",
-                text: "Apakah anda yakin menghapus kategori "+name+"?",
+                title: "Hapus Cabang",
+                text: "Apakah anda yakin menghapus cabang "+name+"?",
                 type: "warning",
                 showCancelButton: !0,
                 cancelButtonText: "Batal",
@@ -142,7 +142,7 @@ document.addEventListener('click', async function(e){
             }).then(t => {
               if(t.value){
               deleteCategory(id, name);
-              getCategory();
+              getBranch();
               }
             })
   }

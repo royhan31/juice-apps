@@ -23,6 +23,7 @@ Route::delete('/toping/{id}','Admin\TopingController@destroy');
 // Route::delete('/toping/{id}','Admin\TopingController@destroy');
 
 Route::get('/branch','Admin\BranchController@index');
+Route::get('/branch/{id}','Admin\BranchController@show');
 Route::post('/branch','Admin\BranchController@store');
 Route::put('/branch/{branch}','Admin\BranchController@update');
 Route::delete('/branch/{branch}','Admin\BranchController@destroy');

@@ -50,6 +50,15 @@ class BranchController extends Controller
     return response()->json(['message' => 'success','status' => true,]);
   }
 
+  public function show($id){
+    $branch = Branch::find($id);
+    return response()->json([
+      'message' => 'success',
+      'status' => true,
+      'data' => $branch
+    ]);
+  }
+
   public function update(Request $request, Branch $branch){
     $rule = [ 'name' => 'required|min:3|max:30' ];
     $message = [
